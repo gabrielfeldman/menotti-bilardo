@@ -1,0 +1,220 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --cell-size: 100px;
+    --bg-color: #238531;
+    --text-color: #fcfcfc;
+    --border-color: #fcfcfc;
+  }
+  
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    font-family: 'Press Start 2P', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    }
+
+  img {
+    width: 100%;
+  }
+
+  .bgr {
+    width: 100%;
+    padding: 1.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .bgr__items {
+   width: 60px;
+   height: 60px;
+   margin-inline: .5rem;
+   padding: 1rem;
+   background-size: cover;
+   filter: contrast(150%);
+   animation: item 5s linear infinite both;
+  }
+
+  .item--1, 
+  .item--3 {
+    animation: item--reverse 5s linear infinite both
+  }
+
+  .item--1 {
+    background-image: url(assets/cigar.png);   
+  }
+
+  .item--2 {
+    background-image: url(assets/tango.png);
+  }
+  .item--3 {
+    background-image: url(assets/world-cup.png);
+  }
+
+  .item--4 {
+    background-image: url(assets/bidon.png);
+  }
+
+
+
+  @keyframes item {
+    from{
+      transform: rotate(0deg);  
+    } 
+    to 
+    {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes item--reverse {
+    from{
+      transform: rotate(0deg);
+    } 
+    to 
+    {
+      transform: rotate(-360deg);
+    }
+  }
+
+
+  .header {
+    min-width: 350px;
+    padding: .5rem;
+    margin-bottom: 1rem;
+    font-size: .7rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center; 
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .board {
+    width: 100vw;
+    margin-bottom: 1rem;
+    display: grid;
+    justify-content: center;
+    align-content: center;    
+    grid-template-columns: repeat(3, auto);
+  }
+  
+  .cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 2px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .cell:first-child,
+  .cell:nth-child(2),
+  .cell:nth-child(3) {
+    border-top: none;
+  }
+  
+  .cell:nth-child(3n + 1) {
+    border-left: none;
+  }
+  
+  .cell:nth-child(3n + 3) {
+    border-right: none;
+  }
+  
+  .cell:last-child,
+  .cell:nth-child(8),
+  .cell:nth-child(7) {
+    border-bottom: none;
+  }
+  
+  .cell.bilardo,
+  .cell.menotti {
+    cursor: not-allowed;
+  }
+  
+  .cell.bilardo::after,
+  .board.bilardo .cell:not(.bilardo):not(.menotti):hover::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(assets/bilardo.png);
+    background-size: cover;
+  }
+  
+  .cell.menotti::after,
+  .board.menotti .cell:not(.bilardo):not(.menotti):hover::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(assets/menotti.png);
+    background-size: cover;
+  }
+
+  .board.bilardo .cell:not(.bilardo):not(.menotti):hover::after,
+  .board.menotti .cell:not(.bilardo):not(.menotti):hover::after {
+    opacity: 0.3;
+  }
+
+  .winning-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 2.5rem;
+    flex-direction: column;
+  }
+
+  .winning-message button {
+    font-size: 1.5rem;
+    font-family: inherit;
+    background-color: var(--text-color);
+    border: 1px solid #222;
+    margin-top: 1.5rem;
+    padding: .25em .5em;
+    cursor: pointer;
+    border-radius: .5rem;
+  }
+  
+  .winning-message button:hover,
+  .winning-message button:active {
+    background-color: #222;
+    color: var(--text-color);
+    border-color: #ddd;
+  }
+  
+  .winning-message.show {
+    display: flex;
+  }
+
+.footer {
+  width: 100%;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .7rem;
+}
+
+.footer__txt {
+  padding: .5rem;
+}
